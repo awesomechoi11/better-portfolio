@@ -20,6 +20,7 @@ export default function InfHScroll(props) {
     const prevTimeRef = useRef(0)
     const timeStep = useRef(0)
     const panStart = useRef(0)
+    const pointerType = useRef('mouse')
 
     const alpha = 0.1
     const fps = 145;
@@ -53,8 +54,14 @@ export default function InfHScroll(props) {
         } else if (!timeStep.current) {
             //if second time running
             timeStep.current = Math.abs(time - prevTimeRef.current)
-        } else if (timeStep.current > Math.abs(time - prevTimeRef.current)) {
+            //document.getElementById('wow').innerHTML = timeStep.current
+
+        } else if (
+            timeStep.current > Math.abs(time - prevTimeRef.current) &&
+            Math.abs(time - prevTimeRef.current) > 6.94
+        ) {
             timeStep.current = Math.abs(time - prevTimeRef.current);
+            //document.getElementById('wow').innerHTML = timeStep.current
         } else if (destX !== currX) {
 
             if (Math.abs(destX - currX) > threshold) {
@@ -62,8 +69,11 @@ export default function InfHScroll(props) {
 
                 //if difference in time between frames long enough minus 1 step/frame
                 //if (Math.abs(time - prevTimeRef.current) + timeStep.current >= mspf) {
-
-                x.set(lerp(currX, destX, 3 * timeStep.current / 250))
+                var multiplier = 4;
+                if (pointerType.current === 'touch') {
+                    multiplier = 16
+                }
+                x.set(lerp(currX, destX, multiplier * Math.sqrt(timeStep.current) / 250))
                 prevTimeRef.current = time
                 //}
 
@@ -88,6 +98,9 @@ export default function InfHScroll(props) {
 
     function handlePan(e) {
         destXRef.current = (e.deltaX + panStart.current)
+        console.log(e.pointerType)
+        pointerType.current = e.pointerType
+        //document.getElementById('wow').innerHTML = e.pointerType
     }
     function handlePanStart(e) {
         panStart.current = destXRef.current
@@ -113,6 +126,9 @@ export default function InfHScroll(props) {
                 }}
                 onWheel={handleScroll}
             >
+                <div id='wow'>
+                    {timeStep.current}
+                </div>
                 {props.children}
             </motion.div>
         </Hammer>
