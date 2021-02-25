@@ -15,11 +15,14 @@ function App() {
     // <div className="App">
     // </div>
     <InfHScroll>
-      <Placeholder width={Math.random() * 100 + 100} />
-      <Placeholder width={Math.random() * 100 + 100} />
-      <Placeholder width={Math.random() * 100 + 100} />
-      <Placeholder width={Math.random() * 100 + 100} />
-      <Placeholder width={Math.random() * 100 + 100} />
+      <Placeholder width={Math.random() * 50 + 30} />
+      <Placeholder width={Math.random() * 50 + 30} />
+
+      <Placeholder width={Math.random() * 50 + 30} />
+      <Placeholder width={Math.random() * 50 + 30} />
+      <Placeholder width={Math.random() * 50 + 30} />
+      <Placeholder width={Math.random() * 50 + 30} />
+
     </InfHScroll>
 
   );
