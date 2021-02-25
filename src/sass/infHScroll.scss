@@ -1,6 +1,9 @@
 .scroll-wrapper {
+    height: 100vh;
     display: flex;
     justify-content: left;
+
+    //transition: transform 1ms;
 
     > * {
         height: 100vh;

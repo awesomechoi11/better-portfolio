@@ -2,8 +2,10 @@ import '../../../sass/infHScroll.scss'
 import Hammer from 'react-hammerjs';
 import { useRecoilState } from 'recoil';
 
+import lerp from 'lerp'
 
 import { motion, useMotionValue } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react';
 
 /** 
  * 
@@ -13,60 +15,107 @@ import { motion, useMotionValue } from 'framer-motion'
 */
 export default function InfHScroll(props) {
 
-    console.log(props.children)
+    const x = useMotionValue(0)
+    const destXRef = useRef(0)
+    const prevTimeRef = useRef(0)
+    const timeStep = useRef(0)
+    const panStart = useRef(0)
+
+    const alpha = 0.1
+    const fps = 145;
+    const mspf = 1000 / fps
+    const threshold = 0.5
 
     var totalWidth = 0;
     props.children.forEach(item => {
-        //console.log(item.props.width)
         totalWidth += item.props.width;
     });
 
-    const transition = {
-        power: 0.4,
-        // Snap calculated target to nearest 50 pixels
-        modifyTarget: target => Math.round(target / 50) * 50
+
+    console.log('rerendered!!')
+
+
+    useEffect(() => {
+        //run update once/ runs forever
+        console.log('start scroll frames')
+        requestAnimationFrame(update)
+    }, [])
+
+    //update if dest != curr
+    function update(time) {
+        const currX = x.get()
+        const destX = destXRef.current
+
+        //if first time running prevTime is not set
+        if (!prevTimeRef.current) {
+            //set prev
+            prevTimeRef.current = time;
+        } else if (!timeStep.current) {
+            //if second time running
+            timeStep.current = Math.abs(time - prevTimeRef.current)
+        } else if (timeStep.current > Math.abs(time - prevTimeRef.current)) {
+            timeStep.current = Math.abs(time - prevTimeRef.current);
+        } else if (destX !== currX) {
+
+            if (Math.abs(destX - currX) > threshold) {
+                //if dest is far from currX
+
+                //if difference in time between frames long enough minus 1 step/frame
+                //if (Math.abs(time - prevTimeRef.current) + timeStep.current >= mspf) {
+
+                x.set(lerp(currX, destX, 3 * timeStep.current / 250))
+                prevTimeRef.current = time
+                //}
+
+            } else {
+                //if close but not equal just set it
+                x.set(destX)
+            }
+
+        } else {
+            //means theyre equal
+            //do nothing
+            //console.log(123)
+        }
+
+        requestAnimationFrame(update)
     }
+
 
     function handleScroll(e) {
-        console.log(e)
+        destXRef.current += (-(e.deltaY / Math.abs(e.deltaY)) * 120)
     }
 
+    function handlePan(e) {
+        destXRef.current = (e.deltaX + panStart.current)
+    }
+    function handlePanStart(e) {
+        panStart.current = destXRef.current
+    }
     return (
         <Hammer
             direction='DIRECTION_HORIZONTAL'
             options={{
                 touchAction: 'pan-x'
             }}
-            onPan={e => {
-                handleScroll(e.deltaX)
-            }}
+            onPan={handlePan}
+            onPanStart={handlePanStart}
         >
 
-            <div
+            <motion.div
                 className='scroll-wrapper'
-                onWheel={e => {
-                    handleScroll(e.deltaY)
+                style={{
+                    width: totalWidth + 'vw',
+                    x
                 }}
+                transition={{
+                    duration: 1
+                }}
+                onWheel={handleScroll}
             >
-
-            </div>
+                {props.children}
+            </motion.div>
         </Hammer>
     )
 }
 
-
-
-// return (
-//     <motion.div
-//         className='scroll-wrapper'
-//         drag="x"
-//         onDrag={(e, info) => {
-//             console.log(info.offset.x)
-//         }}
-//         dragTransition={transition}
-//     >
-
-//         {props.children}
-
-//     </motion.div>
-// )
