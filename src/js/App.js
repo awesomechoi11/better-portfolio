@@ -1,7 +1,11 @@
 import '../sass/App.scss';
-import InfHScroll from './components/infinite-horizontal-scroll/infHScroll'
-
 import React from 'react';
+
+
+import InfHScroll from './components/infinite-horizontal-scroll/infHScroll'
+import IntroCard from './components/introcard/introcard'
+
+
 
 /**
  * 
@@ -12,16 +16,15 @@ import React from 'react';
 
 function App() {
   return (
-    // <div className="App">
-    // </div>
-    <InfHScroll>
-      <Placeholder width={Math.random() * 50 + 30} />
-      <Placeholder width={Math.random() * 50 + 30} />
 
-      <Placeholder width={Math.random() * 50 + 30} />
-      <Placeholder width={Math.random() * 50 + 30} />
-      <Placeholder width={Math.random() * 50 + 30} />
-      <Placeholder width={Math.random() * 50 + 30} />
+    <InfHScroll >
+      <IntroCard />
+      <Placeholder width={50 + 30} />
+      <Placeholder width={50 + 30} />
+      <Placeholder width={50 + 30} />
+      <Placeholder width={50 + 30} />
+      <Placeholder width={50 + 30} />
+      <Placeholder width={50 + 30} />
 
     </InfHScroll>
 

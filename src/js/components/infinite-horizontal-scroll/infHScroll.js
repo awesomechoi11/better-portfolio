@@ -1,6 +1,6 @@
 import '../../../sass/infHScroll.scss'
 import Hammer from 'react-hammerjs';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 import lerp from 'lerp'
 
@@ -22,10 +22,14 @@ import { useEffect, useRef, useState } from 'react';
  * and loop around when reached end of scroll
  * 
 */
+InfHScroll.defaultProps = {
+    initialOffset: 0
+}
+
 export default function InfHScroll(props) {
 
-    const x = useMotionValue(0) //framer hook that controls positioning
-    const destXRef = useRef(0) // target value for x
+    const x = useMotionValue(props.initialOffset) //framer hook that controls positioning
+    const destXRef = useRef(props.initialOffset) // target value for x
     const prevTimeRef = useRef(0) // need to keep track of time between animations to get fps
     const timeStep = useRef(0) // ms per frame
     const panStart = useRef(0) // pan uses delta x instead of velocity
@@ -34,11 +38,22 @@ export default function InfHScroll(props) {
     const threshold = 1
     var multiplier = 4;
 
-    var totalWidth = 0;
+
+    var totalWidth = 0; //width of only the original children
+    var container = { // width of original children + extra children until 100vw
+        width: 0,
+        children: []
+    };
+    console.log(props.children)
     props.children.forEach(item => {
         totalWidth += item.props.width;
+        if (container.width < 100) {
+            container.width += item.props.width
+            container.children.push(item)
+        }
     });
-
+    container.width += totalWidth;
+    const totalWidthpx = totalWidth * window.innerWidth / 100
 
     console.log('InfHScroll!!')
 
@@ -147,7 +162,25 @@ export default function InfHScroll(props) {
                 if (pointerType.current === 'touch') {
                     multiplier = 16
                 }
-                x.set(lerp(currX, destX, multiplier * Math.sqrt(timeStep.current) / 250))
+
+                var newDest = lerp(currX, destX, multiplier * Math.sqrt(timeStep.current) / 250);
+
+
+                //if out of bounds goto other side carrying equalivalent values
+                if (-newDest > totalWidthpx) {
+                    //going out of bounds to the right
+                    newDest += totalWidthpx
+                    destXRef.current += totalWidthpx
+                    panStart.current = 0
+
+                } else if (-newDest < 0) {
+                    //going out of bounds to the left
+                    newDest -= totalWidthpx
+                    destXRef.current -= totalWidthpx
+                    panStart.current = totalWidthpx
+                } else {
+                }
+                x.set(newDest)
                 prevTimeRef.current = time
 
 
@@ -185,10 +218,12 @@ export default function InfHScroll(props) {
         >
             <motion.div
                 className='scroll-wrapper'
-                style={{ width: totalWidth + 'vw', x }}
+                style={{ width: container.width + 'vw', x }}
                 onWheel={handleScroll}
             >
                 {props.children}
+                {container.children}
+
             </motion.div>
         </Hammer>
     )
