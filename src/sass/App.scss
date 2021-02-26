@@ -1,4 +1,24 @@
+@font-face {
+  font-family: "Lato";
+  src: local(Lato), url("../assets/Lato/Lato-Regular.ttf") format("truetype"),
+    url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Lato";
+  src: local(Lato Black), local(Lato-Black), url("../assets/Lato/Lato-Black.ttf") format("truetype"),
+    url("https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap");
+  font-weight: bolder;
+}
+@font-face {
+  font-family: "Merriweather";
+  src: local(Merriweather), url("../assets/Merriweather/Merriweather-Regular.ttf") format("truetype"),
+    url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+  font-weight: normal;
+}
+
 @import "variables";
+
 html,
 body,
 #root {
@@ -7,4 +27,5 @@ body,
   padding: 0;
   margin: 0;
   overflow: hidden;
+  font-family: Merriweather;
 }

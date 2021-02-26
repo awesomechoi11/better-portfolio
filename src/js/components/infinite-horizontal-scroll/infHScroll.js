@@ -42,14 +42,14 @@ export default function InfHScroll(props) {
     var totalWidth = 0; //width of only the original children
     var container = { // width of original children + extra children until 100vw
         width: 0,
-        children: []
+        extraChildren: []
     };
-    console.log(props.children)
+
     props.children.forEach(item => {
         totalWidth += item.props.width;
         if (container.width < 100) {
             container.width += item.props.width
-            container.children.push(item)
+            container.extraChildren.push(item)
         }
     });
     container.width += totalWidth;
@@ -57,12 +57,14 @@ export default function InfHScroll(props) {
 
     console.log('InfHScroll!!')
 
+    //goto(2, 'center', 'right')
 
     useEffect(() => {
-        //run update once/ runs forever
+        //run update once/ recursively runs forever
         console.log('start animation updates')
         requestAnimationFrame(update)
     }, [])
+
 
     //helper function that sets screen position based on px
     function setDest(value, align = 'center', unit = 'px') {
@@ -85,8 +87,6 @@ export default function InfHScroll(props) {
         destXRef.current = newDest
 
     }
-
-
 
     //function to goto a child aligned to center left or right
     function goto(
@@ -131,6 +131,8 @@ export default function InfHScroll(props) {
 
     }
 
+    console.log(setDest)
+
     //update if dest != curr
     function update(time) {
         const currX = x.get()
@@ -155,39 +157,34 @@ export default function InfHScroll(props) {
             }
 
 
-            if (Math.abs(destX - currX) > threshold) {
-                //if dest is far from currX
 
-                //responsive 
-                if (pointerType.current === 'touch') {
-                    multiplier = 16
-                }
-
-                var newDest = lerp(currX, destX, multiplier * Math.sqrt(timeStep.current) / 250);
-
-
-                //if out of bounds goto other side carrying equalivalent values
-                if (-newDest > totalWidthpx) {
-                    //going out of bounds to the right
-                    newDest += totalWidthpx
-                    destXRef.current += totalWidthpx
-                    panStart.current = 0
-
-                } else if (-newDest < 0) {
-                    //going out of bounds to the left
-                    newDest -= totalWidthpx
-                    destXRef.current -= totalWidthpx
-                    panStart.current = totalWidthpx
-                } else {
-                }
-                x.set(newDest)
-                prevTimeRef.current = time
-
-
-            } else {
-                //if close but not equal just set it
-                x.set(destX)
+            //responsive 
+            if (pointerType.current === 'touch') {
+                multiplier = 16
             }
+
+            var newDest = lerp(currX, destX, multiplier * Math.sqrt(timeStep.current) / 250);
+
+
+            //if out of bounds goto other side carrying equalivalent values
+
+            if (-newDest >= totalWidthpx) {
+                //going out of bounds to the right
+                newDest += totalWidthpx
+                destXRef.current += totalWidthpx
+                panStart.current = newDest + panStart.current - currX;
+
+            } else if (-newDest < 0) {
+                //going out of bounds to the left
+                newDest -= totalWidthpx
+                destXRef.current -= totalWidthpx
+                panStart.current = newDest + panStart.current - currX;
+            } else {
+            }
+
+            x.set(newDest)
+            prevTimeRef.current = time
+
 
         } else {
             //means theyre equal
@@ -203,7 +200,7 @@ export default function InfHScroll(props) {
     function handlePan(e) {
         destXRef.current = (e.deltaX + panStart.current)
         pointerType.current = e.pointerType
-        //document.getElementById('wow').innerHTML = e.pointerType
+
     }
     function handlePanStart(e) {
         panStart.current = destXRef.current
@@ -222,7 +219,7 @@ export default function InfHScroll(props) {
                 onWheel={handleScroll}
             >
                 {props.children}
-                {container.children}
+                {container.extraChildren}
 
             </motion.div>
         </Hammer>
