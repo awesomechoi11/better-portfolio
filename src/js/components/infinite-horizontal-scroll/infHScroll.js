@@ -82,7 +82,7 @@ export default function InfHScroll(props) {
 
     props.children.forEach(item => {
 
-        if (item.props.items) {
+        if (item.props.wrapper) {
             console.log(item.props.items)
             container.children.concat(item.props.items.map(thing => (item.props.childWidth)))
         } else {

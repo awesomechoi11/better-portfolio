@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 
 
 IntroCard.defaultProps = {
-    width: px2vw(1640)
+    width: 80
 }
 
 
