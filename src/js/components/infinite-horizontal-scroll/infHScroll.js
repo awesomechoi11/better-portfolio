@@ -1,13 +1,13 @@
 import '../../../sass/infHScroll.scss'
 import Hammer from 'react-hammerjs';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
+import { gotoIndex_atom } from '../../utils/Atom'
 
 import lerp from 'lerp'
 
 import { motion, useMotionValue } from 'framer-motion'
 import { useEffect, useRef } from 'react';
 import { offsetByChildAlign, px2vw, vw2px } from '../../utils/utils';
-
 /** 
  * 
  * Runs update function once
@@ -58,6 +58,8 @@ class unitValue {
 
 export default function InfHScroll(props) {
 
+    const gotoIndexValue = useRecoilValue(gotoIndex_atom)
+
     const x = useMotionValue(props.initialOffset) //framer hook that controls positioning
     const destXRef = useRef(props.initialOffset) // target value for x
     const prevTimeRef = useRef(0) // need to keep track of time between animations to get fps
@@ -72,11 +74,20 @@ export default function InfHScroll(props) {
     var totalWidth = 0; //width of only the original children
     var container = { // width of original children + extra children until 100vw
         width: 0,
+        children: [],
         extraChildren: []
     };
 
     props.children.forEach(item => {
+        if (item.props.items) {
+            console.log(item.props.items)
+            container.children.concat(item.props.items.map(thing => (item.props.childWidth)))
+        } else {
+            container.children.push(item.props.width)
+        }
         totalWidth += item.props.width;
+
+        console.log(item)
         if (container.width < 100) {
             container.width += item.props.width
             container.extraChildren.push(item)
@@ -85,15 +96,12 @@ export default function InfHScroll(props) {
     container.width += totalWidth;
     function totalWidthpx() { return totalWidth * window.innerWidth / 100 }
 
-    console.log('InfHScroll!!', totalWidth)
+    console.log('InfHScroll!!', container)
 
-    //goto(2, 'center', 'right')
 
 
 
     useEffect(() => {
-
-
         window.addEventListener('resize', e => {
 
         })
@@ -102,6 +110,12 @@ export default function InfHScroll(props) {
         console.log('start animation updates')
         requestAnimationFrame(update)
     }, [])
+
+    useEffect(() => {
+        if (gotoIndexValue >= 0) {
+            goto(gotoIndexValue)
+        }
+    }, [gotoIndexValue])
 
 
     function setCurr(value, unit = 'px') {
@@ -135,13 +149,14 @@ export default function InfHScroll(props) {
 
     //function to goto a child aligned to center left or right
     function goto(
-        index,
+        index = 0,
         targetalign = 'center',
         windowalign = 'center',
         offsetvw = 0,
         unit = 'vw'
     ) {
 
+        //const props = this
         console.log('goto ', index)
         //get new destX by adding width of each prev child
         var targetX = offsetvw;

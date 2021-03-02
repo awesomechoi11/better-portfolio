@@ -21,3 +21,8 @@ export const selectedPreview_atom = atom({
     key: 'selectedPreview',
     default: 0
 })
+
+export const gotoIndex_atom = atom({
+    key: 'gotoFunc',
+    default: -1
+})

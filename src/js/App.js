@@ -4,9 +4,7 @@ import React from 'react';
 
 import InfHScroll from './components/infinite-horizontal-scroll/infHScroll'
 import IntroCard from './components/introcard/introcard'
-import PreviewCard from './components/previewcard/previewcard'
-import { AnimateSharedLayout } from 'framer-motion';
-import { px2vw } from './utils/utils';
+import PreviewWrapper from './components/previewcard/previewcard'
 
 
 /**
@@ -16,7 +14,6 @@ import { px2vw } from './utils/utils';
  * 
  */
 
-const test = [0, 1]
 
 
 function App() {
@@ -24,11 +21,7 @@ function App() {
 
     <InfHScroll >
       <IntroCard />
-      <AnimateSharedLayout width={px2vw(700 * 2)}>
-        {test.map(value => (
-          <PreviewCard key={value} />
-        ))}
-      </AnimateSharedLayout>
+      <PreviewWrapper />
       <Placeholder width={50 + 30} />
       <Placeholder width={50 + 30} />
       <Placeholder width={50 + 30} />

@@ -7,8 +7,16 @@
     align-items: center;
 
     .inner {
-        background: red;
+        background: $offwhite;
         width: calcvw(440);
         height: calcvw(590);
+        cursor: pointer;
+    }
+
+    .outline {
+        outline: 7px solid red;
+        height: 100%;
+        width: 100%;
+        outline-offset: 7px;
     }
 }
