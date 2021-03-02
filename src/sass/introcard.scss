@@ -9,5 +9,34 @@
 }
 
 .intro-banner {
-    height: 183px;
+    //height: 183px;
+}
+
+.intro-card {
+    position: relative;
+}
+
+.intro-card .inner {
+    position: absolute;
+    left: calcvw(76);
+    $inner-height: 400;
+    top: calc(50% - #{calcvw($inner-height/2)});
+    height: calcvw($inner-height);
+    width: calcvw(900);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    font-size: calcvw(144);
+
+    .underline {
+        position: relative;
+        top: calcvw(-48);
+        width: 100%;
+        height: calcvw(20);
+        background: black;
+    }
+    .desc {
+        font-size: calcvw(48);
+        text-decoration: underline 3px;
+    }
 }

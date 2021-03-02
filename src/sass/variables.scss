@@ -1,0 +1,26 @@
+@function calcvw($pxvalue) {
+    @return (1vw * ($pxvalue / 19.2));
+}
+
+@mixin calcpos($x, $y) {
+    left: calcvw($x);
+    top: calcvw($y);
+}
+@mixin calcWidthHeight($width, $height) {
+    width: calcvw($width);
+    height: calcvw($height);
+}
+@mixin calcall($x, $y, $width, $height) {
+    @include calcpos($x, $y);
+    @include calcWidthHeight($width, $height);
+}
+@mixin center($width, $height) {
+    left: 50vw;
+    top: 50vh;
+    transform: translate(-1px * $width/2, -1px * $height/2);
+}
+
+$offblack: #242320;
+$offwhite: #e9edde;
+$black: #000;
+$ruby: #d81e5b;

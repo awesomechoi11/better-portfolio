@@ -1,21 +1,74 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect } from 'react';
-import { propTypes } from 'react-hammerjs';
 import '../../../sass/introcard.scss';
+import { fadeinVariants, px2vw } from '../../utils/utils';
+
+import { isVisible_atom } from '../../utils/Atom'
+import { useRecoilState } from 'recoil';
 
 
 IntroCard.defaultProps = {
-    width: 70
+    width: px2vw(1640)
 }
+
+
+
+const underlineVariants = {
+    initial: {
+        width: 0
+    },
+    animate: {
+        width: "100%",
+        transition: {
+            duration: 0.7
+        }
+    }
+}
+const introcardVariants = {
+    initial: {
+        x: '20vw'
+    },
+    animate: {
+        x: 0,
+        transition: {
+            duration: 0.3,
+            delay: 1.3,
+            ease: [.53, .05, .51, .94]
+        }
+    }
+
+}
+
 
 export default function IntroCard(props) {
 
+    const [isVisible, setVisible] = useRecoilState(isVisible_atom)
+
+
     return (
-        <div
+        <motion.div
             style={{ width: props.width + 'vw' }}
+            className='intro-card'
+            initial='initial'
+            animate='animate'
+            variants={introcardVariants}
+            onAnimationComplete={() => {
+                setVisible(true)
+            }}
         >
-            <IndividualLetters className='intro-banner' text='12345678' />
-        </div>
+            <div className='inner'>
+                <IndividualLetters className='intro-banner' text='Brandon Choi' />
+                <motion.div variants={underlineVariants} className='underline' />
+                <AnimatePresence>
+                    <motion.div
+                        initial={fadeinVariants.initial}
+                        animate={isVisible && { opacity: 1 }}
+                        className='desc'>
+                        I am a front-end developer, looking for a full-time position.
+                        </motion.div>
+                </AnimatePresence>
+            </div>
+        </motion.div>
     )
 
 }
@@ -29,7 +82,7 @@ const letterVariants = {
     visible: (custom) => ({
         opacity: 1,
         top: '0px',
-        transition: { delay: custom * 0.2, duration: 2 }
+        transition: { delay: custom * 0.08, duration: 0.3 }
     })
 }
 
@@ -48,7 +101,7 @@ function IndividualLetters(props) {
                     custom={index}
                     className={'indletter-item '}
                     key={letter + index}
-                    style={{ fontSize: 20 * (index + 1) + 'px' }}
+                    //style={{ fontSize: 20 * (index + 1) + 'px' }}
                     initial='initial'
                     animate='visible'
                     variants={letterVariants}
