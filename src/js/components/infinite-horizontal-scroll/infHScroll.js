@@ -72,6 +72,8 @@ export default function InfHScroll(props) {
 
 
     var totalWidth = 0; //width of only the original children
+
+    //need to keep track of children to use goto
     var container = { // width of original children + extra children until 100vw
         width: 0,
         children: [],
@@ -79,6 +81,7 @@ export default function InfHScroll(props) {
     };
 
     props.children.forEach(item => {
+
         if (item.props.items) {
             console.log(item.props.items)
             container.children.concat(item.props.items.map(thing => (item.props.childWidth)))
