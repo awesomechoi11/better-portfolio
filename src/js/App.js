@@ -30,7 +30,7 @@ function App() {
         <Placeholder width={50 + 30} />
         <Placeholder width={50 + 30} />
       </InfHScroll>
-      {/* <ProductWrapper /> */}
+      <ProductWrapper />
     </RecoilRoot>
 
   );
