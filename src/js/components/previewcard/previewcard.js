@@ -41,10 +41,11 @@ function PreviewCard({ width, index, color }) {
     const setScrollEnabled = useSetRecoilState(scrollEnabled_atom)
     const setOpenProduct = useSetRecoilState(openProduct_atom)
 
-    const [isSelected, setSelected] = useRecoilState(selectedPreview_atom)
-
+    const [selectedIndex, setSelected] = useRecoilState(selectedPreview_atom)
+    const isSelected = selectedIndex === index
     const controls = useAnimation()
 
+    const data = products[index]
 
     function handlePreviewClick(e) {
         setSelected(index)
@@ -57,44 +58,26 @@ function PreviewCard({ width, index, color }) {
             })
     }
 
-    const content = (
-        <div className='content'>
-            <div className='image'>
 
-            </div>
-            <div className='text'>
-                <div className='header'>
-                    <div className='title'>
-                        seji - fullstack
-                </div>
-                    <div className='year'>
-                        2020
-                </div>
-                </div>
-                <div className='desc'>
-                    Modern minimalist design for a digital media production company. I made up Seji to test new design and interaction concepts.
-            </div>
-            </div>
-        </div>
-    )
 
     return (
         <motion.div className="preview-card"
-            style={{ width: width + "vw" }}
+            style={{
+                width: width + "vw",
+                zIndex: isSelected ? 2 : 1
+            }}
             initial={fadeinVariants.initial}
             animate={isVisible && { opacity: 1 }}
         >
             <motion.div className="inner"
                 animate={controls}
                 onClick={handlePreviewClick}
-                onMouseEnter={e => {
-                    setSelected(index)
-                }}
-
+                onMouseEnter={e => { setSelected(index) }}
                 initial="initial"
                 variants={fromPreviewToProduct}
             >
-                {isSelected === index && (
+
+                {isSelected && (
                     <motion.div
                         layoutId="outline"
                         className="outline"
@@ -103,32 +86,37 @@ function PreviewCard({ width, index, color }) {
                         transition={spring}
                     />
                 )}
-                <div
-                    style={{
-                        transform: isSelected === index && 'translateY( -100% )'
-                    }}
+                <motion.div style={{ transform: isSelected && 'translateY( -100% )' }}
                     className='content'>
-                    <div className='image'>
-                        preview image here
-                    </div>
-                    <div className='text'>
-                        <div className='header'>
-                            <div className='title'>
-                                seji - fullstack
-                            </div>
-                            <div className='year'>
-                                2020
-                            </div>
-                        </div>
-                        <div className='desc'>
-                            Modern minimalist design for a digital media production company. I made up Seji to test new design and interaction concepts.
-                        </div>
-                    </div>
-                </div>
+                    <PreviewHeader {...data} />
+                </motion.div>
 
             </motion.div>
         </motion.div>
     )
+
+}
+
+export function PreviewHeader({ color, title, role, desc, year }) {
+
+    return (<>
+        <div className='image'>
+            preview image here
+                    </div>
+        <div className='text'>
+            <div className='header'>
+                <div className='title'>
+                    {title + ' · ' + role}
+                </div>
+                <div className='year'>
+                    {year}
+                </div>
+            </div>
+            <div className='desc'>
+                {desc}
+            </div>
+        </div>
+    </>)
 
 }
 
