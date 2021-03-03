@@ -3,14 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './js/App';
 import reportWebVitals from './reportWebVitals';
 
-import { RecoilRoot } from 'recoil';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <RecoilRoot>
-      <App />
-    </RecoilRoot>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

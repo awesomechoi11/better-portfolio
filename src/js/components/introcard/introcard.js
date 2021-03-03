@@ -43,7 +43,7 @@ const introcardVariants = {
 export default function IntroCard(props) {
 
     const [isVisible, setVisible] = useRecoilState(isVisible_atom)
-
+    console.log(isVisible)
 
     return (
         <motion.div
@@ -53,6 +53,7 @@ export default function IntroCard(props) {
             animate='animate'
             variants={introcardVariants}
             onAnimationComplete={() => {
+                console.log(123)
                 setVisible(true)
             }}
         >

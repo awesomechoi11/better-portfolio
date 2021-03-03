@@ -1,11 +1,12 @@
 import '../sass/App.scss';
 import React from 'react';
+import { RecoilRoot } from 'recoil';
 
 
 import InfHScroll from './components/infinite-horizontal-scroll/infHScroll'
 import IntroCard from './components/introcard/introcard'
 import PreviewWrapper from './components/previewcard/previewcard'
-
+import ProductWrapper from './components/products/productwrapper'
 
 /**
  * 
@@ -18,18 +19,19 @@ import PreviewWrapper from './components/previewcard/previewcard'
 
 function App() {
   return (
-
-    <InfHScroll >
-      <IntroCard />
-      <PreviewWrapper />
-      <Placeholder width={50 + 30} />
-      <Placeholder width={50 + 30} />
-      <Placeholder width={50 + 30} />
-      <Placeholder width={50 + 30} />
-      <Placeholder width={50 + 30} />
-      <Placeholder width={50 + 30} />
-
-    </InfHScroll>
+    <RecoilRoot>
+      <InfHScroll >
+        <IntroCard />
+        <PreviewWrapper />
+        <Placeholder width={50 + 30} />
+        <Placeholder width={50 + 30} />
+        <Placeholder width={50 + 30} />
+        <Placeholder width={50 + 30} />
+        <Placeholder width={50 + 30} />
+        <Placeholder width={50 + 30} />
+      </InfHScroll>
+      <ProductWrapper />
+    </RecoilRoot>
 
   );
 }

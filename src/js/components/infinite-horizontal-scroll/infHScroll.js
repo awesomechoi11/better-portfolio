@@ -82,32 +82,33 @@ export default function InfHScroll(props) {
 
     props.children.forEach(item => {
 
+        //if special child
+        //get number of children and add that many to container
         if (item.props.wrapper) {
-            console.log(item.props.items)
             container.children = container.children.concat(item.props.items.map(thing => (item.props.childWidth)))
-            console.log(item.props.items.map(thing => (item.props.childWidth)))
         } else {
             container.children.push(item.props.width)
         }
-        totalWidth += item.props.width;
 
-        console.log(item)
+        totalWidth += item.props.width;
         if (container.width < 100) {
             container.width += item.props.width
             container.extraChildren.push(item)
         }
+
     });
     container.width += totalWidth;
     function totalWidthpx() { return totalWidth * window.innerWidth / 100 }
 
-    console.log('InfHScroll!!', container.children)
+    console.log('InfHScroll!!')
 
 
 
 
     useEffect(() => {
         window.addEventListener('resize', e => {
-
+            //need to throttle
+            // need to change currx and destx. scaling to new size
         })
 
         //run update once/ recursively runs forever
