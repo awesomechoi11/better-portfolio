@@ -6,48 +6,8 @@ import { motion, AnimateSharedLayout, useAnimation } from "framer-motion"
 
 import products from "../../../config.json";
 import { fromPreviewToProduct } from "../../animVariants";
+import { useState } from "react";
 
-
-[
-    {
-        "preview": "preview1",
-        "video-preview": "preview2",
-        "enabled": "true",
-        "title": "SEJI",
-        "role": "FRONT END",
-        "desc": "Seji is a digital media production company. I emulated a modern minimalist design to attract the most attention to their work. I made up Seji to test new designs and interactive components.",
-        "year": "2020",
-        "link": "https://www.seji.brandon-choi.info/"
-    },
-    {
-        "preview": " nomina1",
-        "video-preview": "nomina2",
-        "enabled": "true",
-        "title": "NOMINA",
-        "role": "FRONT END",
-        "desc": "Nomina is a high end jewelry company. I incorporated elegent and simplistic animations and interactions.",
-        "year": "2020",
-        "link": "https://www.nomina.brandon-choi.info/"
-    },
-    {
-        "preview": "comingsoon",
-        "video-preview": "preview2",
-        "enabled": "false",
-        "title": "COMING SOON",
-        "role": "FRONT END + BACK END",
-        "desc": "I made a highly versatile clothing scalper of a popular clothng brand called Supreme. BTW i never used or lent it to anyone!",
-        "year": "2018"
-    },
-    {
-        "preview": "comingsoon",
-        "video-preview": "preview2",
-        "enabled": "false",
-        "title": "COMING SOON",
-        "role": "BACK END",
-        "desc": "Here are some miscellaneous goodies I made in highschool.",
-        "year": "2018"
-    }
-]
 
 const previewCardWidth = px2vw(700);
 PreviewWrapper.defaultProps = {
@@ -85,6 +45,39 @@ function PreviewCard({ width, index, color }) {
 
     const controls = useAnimation()
 
+
+    function handlePreviewClick(e) {
+        setSelected(index)
+        setGotoIndex(index + 1)
+        setScrollEnabled(false)
+        controls.start("animate")
+            .then((value) => {
+                setOpenProduct({ isOpen: true, index: index })
+                controls.set("initial")
+            })
+    }
+
+    const content = (
+        <div className='content'>
+            <div className='image'>
+
+            </div>
+            <div className='text'>
+                <div className='header'>
+                    <div className='title'>
+                        seji - fullstack
+                </div>
+                    <div className='year'>
+                        2020
+                </div>
+                </div>
+                <div className='desc'>
+                    Modern minimalist design for a digital media production company. I made up Seji to test new design and interaction concepts.
+            </div>
+            </div>
+        </div>
+    )
+
     return (
         <motion.div className="preview-card"
             style={{ width: width + "vw" }}
@@ -93,16 +86,7 @@ function PreviewCard({ width, index, color }) {
         >
             <motion.div className="inner"
                 animate={controls}
-                onClick={e => {
-                    setSelected(index)
-                    setGotoIndex(index + 1)
-                    setScrollEnabled(false)
-                    controls.start("animate")
-                        .then((value) => {
-                            setOpenProduct({ isOpen: true, index: index })
-                            controls.set("initial")
-                        })
-                }}
+                onClick={handlePreviewClick}
                 onMouseEnter={e => {
                     setSelected(index)
                 }}
@@ -115,11 +99,33 @@ function PreviewCard({ width, index, color }) {
                         layoutId="outline"
                         className="outline"
                         initial={false}
-                        //style={{ outlineColor: color }}
                         animate={{ outlineColor: color }}
                         transition={spring}
                     />
                 )}
+                <div
+                    style={{
+                        transform: isSelected === index && 'translateY( -100% )'
+                    }}
+                    className='content'>
+                    <div className='image'>
+                        preview image here
+                    </div>
+                    <div className='text'>
+                        <div className='header'>
+                            <div className='title'>
+                                seji - fullstack
+                            </div>
+                            <div className='year'>
+                                2020
+                            </div>
+                        </div>
+                        <div className='desc'>
+                            Modern minimalist design for a digital media production company. I made up Seji to test new design and interaction concepts.
+                        </div>
+                    </div>
+                </div>
+
             </motion.div>
         </motion.div>
     )

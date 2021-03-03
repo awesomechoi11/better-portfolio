@@ -15,7 +15,7 @@ export const fromPreviewToProduct = {
         width: '100vw',
         height: '100vh',
         transition: {
-            duration: 8
+            duration: 1
         }
     },
     exit: {
@@ -24,30 +24,3 @@ export const fromPreviewToProduct = {
     }
 }
 
-// export const fromPreviewToProduct = {
-//     initial: {
-//         opacity: 1,
-//         top: '50vh',
-//         left: '50vw',
-//         width: previewWidth + 'vw',
-//         height: previewHeight + 'vw',
-//         y: -(previewHeight / 2) + 'vw',
-//         x: -(previewWidth / 2) + 'vw',
-//     },
-//     animate: {
-//         opacity: 1,
-//         top: 0,
-//         left: 0,
-//         width: '100vw',
-//         height: '100vh',
-//         y: '0vw',
-//         x: '0vw',
-//         transition: {
-//             duration: 8
-//         }
-//     },
-//     exit: {
-//         opacity: 0,
-//         width: '100vw',
-//     }
-// }

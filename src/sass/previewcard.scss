@@ -11,16 +11,50 @@
     }
 
     .inner {
-        background: $offwhite;
+        //background: $offwhite;
         width: calcvw(440);
         height: calcvw(590);
         cursor: pointer;
     }
 
     .outline {
-        outline: 7px solid red;
+        outline: calcvw(7) solid red;
         height: 100%;
         width: 100%;
-        outline-offset: 7px;
+        outline-offset: calcvw(7);
+        position: relative;
+    }
+    .content {
+        position: relative;
+        //color: black;
+        transform: translateY(0);
+        // width: $previewWidth;
+        // height: $previewHeight;
+        height: 100%;
+        width: 100%;
+        font-size: calcvw(24);
+        .image {
+            height: calcvw(480);
+        }
+        .text {
+            height: $previewHeight - calcvw(480);
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+        .header {
+            font-size: calcvw(36);
+            display: flex;
+            justify-content: space-between;
+            .year {
+                color: #7b7b7b;
+            }
+        }
+        .desc {
+            font-family: Merriweather;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: " - cont.";
+        }
     }
 }
