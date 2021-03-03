@@ -26,3 +26,16 @@ export const gotoIndex_atom = atom({
     key: 'gotoFunc',
     default: -1
 })
+
+export const openProduct_atom = atom({
+    key: 'openProduct',
+    default: {
+        isOpen: false,
+        index: -1
+    }
+})
+
+export const scrollEnabled_atom = atom({
+    key: 'scrollEnabled',
+    default: true
+})

@@ -1,7 +1,7 @@
 import '../../../sass/infHScroll.scss'
 import Hammer from 'react-hammerjs';
 import { useRecoilValue } from 'recoil';
-import { gotoIndex_atom } from '../../utils/Atom'
+import { gotoIndex_atom, scrollEnabled_atom } from '../../utils/Atom'
 
 import lerp from 'lerp'
 
@@ -66,6 +66,7 @@ export default function InfHScroll(props) {
     const timeStep = useRef(0) // ms per frame
     const panStart = useRef(0) // pan uses delta x instead of velocity
     const pointerType = useRef('mouse') // decides multiplier// faster lerp for mobile
+    const scrollEnabled = useRecoilValue(scrollEnabled_atom)
 
     const threshold = 1 //min diff to change x
     var multiplier = 4; // lerp speed
@@ -259,14 +260,23 @@ export default function InfHScroll(props) {
 
 
     function handleScroll(e) {
+        if (!scrollEnabled) {
+            return
+        }
         destXRef.current += (-(e.deltaY / Math.abs(e.deltaY)) * 120)
     }
     function handlePan(e) {
+        if (!scrollEnabled) {
+            return
+        }
         destXRef.current = (e.deltaX + panStart.current)
         pointerType.current = e.pointerType
 
     }
     function handlePanStart(e) {
+        if (!scrollEnabled) {
+            return
+        }
         panStart.current = destXRef.current
     }
 

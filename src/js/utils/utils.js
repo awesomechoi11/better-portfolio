@@ -9,6 +9,14 @@ export function vw2px(value) {
     return value * (window.innerWidth / 100)
 }
 
+export function px2vw19(value) {
+    return value / 19.2
+}
+
+export function vw2px19(value) {
+    return value * 19.2
+}
+
 export function offsetByChildAlign(childWidth, align) {
     if (align === 'center') {
         return childWidth / 2;

@@ -1,0 +1,15 @@
+@import "variables";
+
+.product-wrapper {
+    $previewWidth: 440;
+    $previewHeight: 590;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    width: calcvw($previewWidth);
+    height: calcvw($previewHeight);
+    z-index: 3;
+    background: yellow;
+    transform-origin: center;
+    transform: translateX(-11.4583vw) translateY(-15.3646vw) translateZ(0px);
+}
