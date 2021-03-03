@@ -56,7 +56,7 @@ function PreviewCard({ width, index, color }) {
             <div className='inner'
                 onClick={e => {
                     setSelected(index)
-                    setGotoIndex(index)
+                    setGotoIndex(index + 1)
                 }}
                 onMouseEnter={e => {
                     //console.log(e)

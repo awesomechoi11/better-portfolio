@@ -84,7 +84,8 @@ export default function InfHScroll(props) {
 
         if (item.props.wrapper) {
             console.log(item.props.items)
-            container.children.concat(item.props.items.map(thing => (item.props.childWidth)))
+            container.children = container.children.concat(item.props.items.map(thing => (item.props.childWidth)))
+            console.log(item.props.items.map(thing => (item.props.childWidth)))
         } else {
             container.children.push(item.props.width)
         }
@@ -99,7 +100,7 @@ export default function InfHScroll(props) {
     container.width += totalWidth;
     function totalWidthpx() { return totalWidth * window.innerWidth / 100 }
 
-    console.log('InfHScroll!!', container)
+    console.log('InfHScroll!!', container.children)
 
 
 
@@ -164,9 +165,9 @@ export default function InfHScroll(props) {
         //get new destX by adding width of each prev child
         var targetX = offsetvw;
         for (var i = 0; i < index; i++) {
-            targetX -= props.children[i].props.width;
+            targetX -= container.children[i];
         }
-        const targetWidth = props.children[index].props.width;
+        const targetWidth = container.children[index];
         ////offset for aligning child as target
         targetX -= offsetByChildAlign(targetWidth, targetalign)
 
