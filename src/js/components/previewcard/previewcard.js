@@ -1,10 +1,11 @@
 import '../../../sass/previewcard.scss'
 import { fadeinVariants, px2vw } from '../../utils/utils'
-import { gotoIndex_atom, isVisible_atom, selectedPreview_atom } from '../../utils/Atom'
+import { gotoIndex_atom, isVisible_atom, scrollEnabled_atom, selectedPreview_atom } from '../../utils/Atom'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { motion, AnimateSharedLayout } from 'framer-motion'
+import { motion, AnimateSharedLayout, useAnimation } from 'framer-motion'
 
 import products from '../../../config.json';
+import { fromPreviewToProduct } from '../../animVariants';
 
 const previewCardWidth = px2vw(700);
 PreviewWrapper.defaultProps = {
@@ -33,8 +34,10 @@ PreviewCard.defaultProps = {
 
 function PreviewCard({ width, index, color }) {
     const isVisible = useRecoilValue(isVisible_atom)
+    const setScrollEnabled = useSetRecoilState(scrollEnabled_atom)
     const [isSelected, setSelected] = useRecoilState(selectedPreview_atom)
     const setGotoIndex = useSetRecoilState(gotoIndex_atom)
+    const controls = useAnimation()
 
     return (
         <motion.div className='preview-card'
@@ -42,15 +45,24 @@ function PreviewCard({ width, index, color }) {
             initial={fadeinVariants.initial}
             animate={isVisible && { opacity: 1 }}
         >
-            <div className='inner'
+            <motion.div className='inner'
+                animate={controls}
                 onClick={e => {
                     setSelected(index)
                     setGotoIndex(index + 1)
+                    setScrollEnabled(false)
+                    controls.start('animate')
+                        .then()
                 }}
                 onMouseEnter={e => {
                     //console.log(e)
                     setSelected(index)
                 }}
+                onAnimationComplete={() => {
+                    console.log(123)
+                }}
+                initial='initial'
+                variants={fromPreviewToProduct}
             >
                 {isSelected === index && (
                     <motion.div
@@ -62,7 +74,7 @@ function PreviewCard({ width, index, color }) {
                         transition={spring}
                     />
                 )}
-            </div>
+            </motion.div>
         </motion.div>
     )
 
