@@ -8,4 +8,20 @@
     height: 100%;
     z-index: 3;
     background: $offblack;
+
+    .util-btns {
+        position: fixed;
+        z-index: 1;
+        .close-product {
+            position: absolute;
+            z-index: 1;
+            top: calcvw(80);
+            left: calcvw(80);
+            cursor: pointer;
+        }
+    }
+}
+
+.product-showcase {
+    padding: 0 calcvw(160);
 }

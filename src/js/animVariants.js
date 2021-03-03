@@ -24,3 +24,15 @@ export const fromPreviewToProduct = {
     }
 }
 
+export const exitPreview = {
+    initial: false,
+    animate: {
+        opacity: 1,
+        y: 0,
+    },
+    exit: {
+        opacity: 0,
+        y: '100vh'
+
+    }
+}

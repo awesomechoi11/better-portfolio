@@ -16,7 +16,7 @@
         "video-preview": "nomina2",
         "enabled": "true",
         "title": "NOMINA",
-        "role": "FRONT END",
+        "role": "fullstack",
         "desc": "Nomina is a high end jewelry company. I incorporated elegent and simplistic animations and interactions.",
         "year": "2020",
         "link": "https://www.nomina.brandon-choi.info/"
@@ -26,8 +26,8 @@
         "preview": "comingsoon",
         "video-preview": "preview2",
         "enabled": "false",
-        "title": "COMING SOON",
-        "role": "FRONT END + BACK END",
+        "title": "coming",
+        "role": "soon",
         "desc": "I made a highly versatile clothing scalper of a popular clothng brand called Supreme. BTW i never used or lent it to anyone!",
         "year": "2018"
     },
@@ -36,8 +36,8 @@
         "preview": "comingsoon",
         "video-preview": "preview2",
         "enabled": "false",
-        "title": "COMING SOON",
-        "role": "BACK END",
+        "title": "coming",
+        "role": "soon",
         "desc": "Here are some miscellaneous goodies I made in highschool.",
         "year": "2018"
     }

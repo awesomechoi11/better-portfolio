@@ -34,7 +34,7 @@
     // height: $previewHeight;
     height: 100%;
     width: 100%;
-    font-size: calcvw(24);
+    font-size: calcvw(18);
 
     .image {
         height: 81.3559322034%;
@@ -51,7 +51,7 @@
         }
     }
     .header {
-        font-size: calcvw(36);
+        font-size: calcvw(28);
         display: flex;
         justify-content: space-between;
     }

@@ -38,9 +38,9 @@ function PreviewCard({ width, index, color }) {
     const isVisible = useRecoilValue(isVisible_atom)
 
     const setGotoIndex = useSetRecoilState(gotoIndex_atom)
-    const setScrollEnabled = useSetRecoilState(scrollEnabled_atom)
     const setOpenProduct = useSetRecoilState(openProduct_atom)
 
+    const [scrollEnabled, setScrollEnabled] = useRecoilState(scrollEnabled_atom)
     const [selectedIndex, setSelected] = useRecoilState(selectedPreview_atom)
     const isSelected = selectedIndex === index
     const controls = useAnimation()
@@ -58,7 +58,11 @@ function PreviewCard({ width, index, color }) {
             })
     }
 
-
+    function handleMouseEnter() {
+        if (scrollEnabled) {
+            setSelected(index)
+        }
+    }
 
     return (
         <motion.div className="preview-card"
@@ -72,7 +76,7 @@ function PreviewCard({ width, index, color }) {
             <motion.div className="inner"
                 animate={controls}
                 onClick={handlePreviewClick}
-                onMouseEnter={e => { setSelected(index) }}
+                onMouseEnter={handleMouseEnter}
                 initial="initial"
                 variants={fromPreviewToProduct}
             >

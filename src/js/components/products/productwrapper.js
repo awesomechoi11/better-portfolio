@@ -42,7 +42,7 @@ export default function ProductWrapper() {
                             <div className='close-product'
                                 onClick={closeProduct}
                             >
-                                close
+                                {closeSvg}
                             </div>
                         </div>
                         <div className='content'>
@@ -61,7 +61,7 @@ export default function ProductWrapper() {
 function Product() {
     return (
         <div className='product-showcase'>
-            hello
+            hello <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />s
         </div>
     )
 }
