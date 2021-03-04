@@ -2,11 +2,11 @@ import '../sass/App.scss';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 
-
 import InfHScroll from './components/infinite-horizontal-scroll/infHScroll'
 import IntroCard from './components/introcard/introcard'
 import PreviewWrapper from './components/previewcard/previewcard'
 import ProductWrapper from './components/products/productwrapper'
+
 
 /**
  * 

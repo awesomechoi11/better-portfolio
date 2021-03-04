@@ -1,8 +1,8 @@
 [
     {
         "color": "#ff0055",
-        "preview": "preview1",
-        "video-preview": "preview2",
+        "preview": "https://brandon-choi.sfo3.digitaloceanspaces.com/portfolio/seji/SIGN.jpg",
+        "videoPreview": "https://brandon-choi.sfo3.digitaloceanspaces.com/portfolio/seji/Seji-Preview-1.m4v",
         "enabled": "true",
         "title": "SEJI",
         "role": "FRONT END",
@@ -12,8 +12,8 @@
     },
     {
         "color": "#0099ff",
-        "preview": " nomina1",
-        "video-preview": "nomina2",
+        "preview": "https://brandon-choi.sfo3.digitaloceanspaces.com/portfolio/nomina/nomina-prev.jpg",
+        "videoPreview": "https://brandon-choi.sfo3.digitaloceanspaces.com/portfolio/nomina/nomina-prev.m4v",
         "enabled": "true",
         "title": "NOMINA",
         "role": "fullstack",
@@ -23,8 +23,8 @@
     },
     {
         "color": "#22cc88",
-        "preview": "comingsoon",
-        "video-preview": "preview2",
+        "preview": "https://brandon-choi.sfo3.digitaloceanspaces.com/portfolio/seji/SIGN.jpg",
+        "videoPreview": "https://brandon-choi.sfo3.digitaloceanspaces.com/portfolio/seji/Seji-Preview-1.m4v",
         "enabled": "false",
         "title": "coming",
         "role": "soon",
@@ -33,8 +33,8 @@
     },
     {
         "color": "#ffaa00",
-        "preview": "comingsoon",
-        "video-preview": "preview2",
+        "preview": "https://brandon-choi.sfo3.digitaloceanspaces.com/portfolio/seji/SIGN.jpg",
+        "videoPreview": "https://brandon-choi.sfo3.digitaloceanspaces.com/portfolio/seji/Seji-Preview-1.m4v",
         "enabled": "false",
         "title": "coming",
         "role": "soon",

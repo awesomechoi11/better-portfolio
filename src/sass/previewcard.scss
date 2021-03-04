@@ -38,6 +38,12 @@
 
     .image {
         height: 81.3559322034%;
+        > * {
+            width: 100%;
+            height: 94%;
+            object-fit: cover;
+            pointer-events: none;
+        }
     }
     .text {
         height: $previewHeight - calcvw(480);

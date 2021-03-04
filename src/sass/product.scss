@@ -12,6 +12,7 @@
     .util-btns {
         position: fixed;
         z-index: 1;
+        mix-blend-mode: difference;
         .close-product {
             position: absolute;
             z-index: 1;

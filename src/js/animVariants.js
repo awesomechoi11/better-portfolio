@@ -15,7 +15,8 @@ export const fromPreviewToProduct = {
         width: '100vw',
         height: '100vh',
         transition: {
-            duration: 1
+            duration: 1,
+            ease: [.54, .04, .51, .97]
         }
     },
     exit: {

@@ -46,7 +46,7 @@ export default function ProductWrapper() {
                             </div>
                         </div>
                         <div className='content'>
-                            <PreviewHeader {...data} />
+                            <PreviewHeader {...data} video={true} />
                         </div>
                         <Product />
                     </PerfectScrollbar>
@@ -61,7 +61,23 @@ export default function ProductWrapper() {
 function Product() {
     return (
         <div className='product-showcase'>
+            <div className='product-details'>
+                <div className='col-1'>
+                    col1
+                </div>
+                <div className='col-2'>
+                    col1
+                </div>
+                <div className='col-3'>
+                    col1
+                </div>
+            </div>
             hello <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />s
+            hello <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />s
+            hello <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />s
+            hello <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />s
+            hello <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />s
+
         </div>
     )
 }

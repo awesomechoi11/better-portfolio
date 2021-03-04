@@ -1,6 +1,6 @@
 import '../../../sass/infHScroll.scss'
 import Hammer from 'react-hammerjs';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { gotoIndex_atom, scrollEnabled_atom } from '../../utils/Atom'
 
 import lerp from 'lerp'
@@ -8,6 +8,7 @@ import lerp from 'lerp'
 import { motion, useMotionValue } from 'framer-motion'
 import { useEffect, useRef } from 'react';
 import { offsetByChildAlign, px2vw, vw2px } from '../../utils/utils';
+
 /** 
  * 
  * Runs update function once
@@ -15,7 +16,7 @@ import { offsetByChildAlign, px2vw, vw2px } from '../../utils/utils';
  * 
  * on each update:
  * check if difference between destX and currX is greater than threshold
- *      true then lerp currX  
+ *      true then lerp destx to currX  
  *      false then set currX to dest X
  * 
  * 
@@ -27,38 +28,9 @@ InfHScroll.defaultProps = {
     initialOffset: 0
 }
 
-class unitValue {
-
-    units = ['px', 'vw']
-
-    constructor(unit, value) {
-        this.unit = unit;
-        if (!this.units.includes(unit)) {
-            throw 'invalid unit type'
-        }
-        this.value = value
-    }
-    getPx() {
-        if (this.unit === 'px') {
-            return this.value
-        } else if (this.unit === 'vw') {
-            return vw2px(this.value)
-        } else {
-            throw 'topx'
-        }
-    }
-    add(value, unit) {
-        if (unit === this.unit) {
-            this.value += value;
-        } else {
-
-        }
-    }
-}
-
 export default function InfHScroll(props) {
 
-    const gotoIndexValue = useRecoilValue(gotoIndex_atom)
+    const [gotoIndexValue, setIndexValue] = useRecoilState(gotoIndex_atom)
 
     const x = useMotionValue(props.initialOffset) //framer hook that controls positioning
     const destXRef = useRef(props.initialOffset) // target value for x
@@ -82,7 +54,6 @@ export default function InfHScroll(props) {
     };
 
     props.children.forEach(item => {
-
         //if special child
         //get number of children and add that many to container
         if (item.props.wrapper) {
@@ -99,9 +70,9 @@ export default function InfHScroll(props) {
 
     });
     container.width += totalWidth;
-    function totalWidthpx() { return totalWidth * window.innerWidth / 100 }
 
     console.log('InfHScroll!!')
+
 
 
 
@@ -153,6 +124,9 @@ export default function InfHScroll(props) {
 
     }
 
+    function totalWidthpx() { return totalWidth * window.innerWidth / 100 }
+
+
     //function to goto a child aligned to center left or right
     function goto(
         index = 0,
@@ -188,7 +162,7 @@ export default function InfHScroll(props) {
         }
 
         setDest(targetX, 'left')
-
+        setIndexValue(-1)
     }
 
 

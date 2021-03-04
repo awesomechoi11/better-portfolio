@@ -101,12 +101,27 @@ function PreviewCard({ width, index, color }) {
 
 }
 
-export function PreviewHeader({ color, title, role, desc, year }) {
+export function PreviewHeader({ color, title, role, desc, year, preview, videoPreview, video }) {
+
+
 
     return (<>
         <div className='image'>
-            preview image here
-                    </div>
+            {video ?
+                (
+                    <video autoPlay={true} loop={true} >
+                        <source src={videoPreview} />
+                    </video>
+                ) : (
+                    <img
+                        src={preview}
+                        onLoad={e => {
+                            console.log('hello! image loaded ', preview)
+                        }}
+                    />
+                )
+            }
+        </div>
         <div className='text'>
             <div className='header'>
                 <div className='title'>
