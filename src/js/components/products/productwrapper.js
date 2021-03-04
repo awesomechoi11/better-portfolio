@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, DragFeature, motion } from 'framer-motion'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar'
@@ -67,7 +67,7 @@ function Product(props) {
         <div className='product-showcase'>
             {data.productDetails && <ProductDetails data={data.productDetails} />}
             {data.initialSketch && <InitialSketch data={data.initialSketch} />}
-
+            {data.conceptsExplored && <ConceptsExplored data={data.conceptsExplored} />}
         </div>
     )
 }
@@ -126,7 +126,6 @@ function InitialSketch({ data }) {
 
     return (
         <div className='sketch-wrapper'>
-
             <div className='banner-wrapper'>
                 <InfBanner text='INITIAL SKETCH *' />
             </div>
@@ -142,4 +141,32 @@ function InitialSketch({ data }) {
             </div>
         </div>
     )
+}
+
+function BigTitle({ texts }) {
+    return (
+        <div className='big-title-wrapper'>
+            {texts.map((text, index) => (
+                <div className={'big-title ' + (texts.length - 1 === index ? 'last' : '')}>
+                    {text}
+                </div>
+            ))}
+
+        </div>
+    )
+}
+
+function ConceptsExplored({ data }) {
+
+    console.log(data)
+
+    return (
+        <div className='concepts-explored-wrapper'>
+            <BigTitle texts={data.title} />
+            <div>
+                hello world!!hello world!!hello world!!hello world!!hello world!!hello world!!hello world!!hello world!!hello world!!hello world!!hello world!!hello world!!hello world!!hello world!!hello world!!hello world!!
+            </div>
+        </div>
+    )
+
 }

@@ -54,6 +54,10 @@
             background: $darkblue;
         }
     }
+}
+
+.sketch-wrapper {
+    margin-bottom: calcvw(100);
 
     .banner-wrapper {
         width: calcvw(200);
@@ -85,6 +89,19 @@
             img {
                 width: 100%;
             }
+        }
+    }
+}
+
+.big-title-wrapper {
+    position: relative;
+    left: calcvw(-240);
+    .big-title {
+        font-size: calcvw(288);
+        color: $offwhite;
+        font-weight: bolder;
+        &.last {
+            margin-bottom: calcvw(-100);
         }
     }
 }
