@@ -25,4 +25,9 @@
 
 .product-showcase {
     padding: 0 calcvw(160);
+
+    .product-details {
+        display: flex;
+        justify-content: space-between;
+    }
 }

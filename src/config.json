@@ -8,7 +8,42 @@
         "role": "FRONT END",
         "desc": "Seji is a digital media production company. I emulated a modern minimalist design to attract the most attention to their work. I made up Seji to test new designs and interactive components.",
         "year": "2020",
-        "link": "https://www.seji.brandon-choi.info/"
+        "link": "https://www.seji.brandon-choi.info/",
+        "productDetails": [
+            {
+                "projectType": "Concept Demonstration",
+                "role": "Fullstack + Design",
+                "team": [
+                    "solo"
+                ]
+            },
+            {
+                "motivation": [
+                    "To research and study modern ui/ux techniques.",
+                    "Learn scroll interactions involving parallax and animations"
+                ],
+                "challenges": [
+                    "Using Locomotive-Scroll with GSAP",
+                    ""
+                ],
+                "conceptsExplored": [
+                    "Dynamic and fluid scroll animations/ interactions",
+                    "Creating a seamless experience"
+                ]
+            },
+            {
+                "technologies": [
+                    "handlebars",
+                    "sass",
+                    "animejs",
+                    "locomotivescroll",
+                    "rellax",
+                    "glidejs",
+                    "express",
+                    "nodejs"
+                ]
+            }
+        ]
     },
     {
         "color": "#0099ff",
@@ -19,26 +54,41 @@
         "role": "fullstack",
         "desc": "Nomina is a high end jewelry company. I incorporated elegent and simplistic animations and interactions.",
         "year": "2020",
-        "link": "https://www.nomina.brandon-choi.info/"
-    },
-    {
-        "color": "#22cc88",
-        "preview": "https://brandon-choi.sfo3.digitaloceanspaces.com/portfolio/seji/SIGN.jpg",
-        "videoPreview": "https://brandon-choi.sfo3.digitaloceanspaces.com/portfolio/seji/Seji-Preview-1.m4v",
-        "enabled": "false",
-        "title": "coming",
-        "role": "soon",
-        "desc": "I made a highly versatile clothing scalper of a popular clothng brand called Supreme. BTW i never used or lent it to anyone!",
-        "year": "2018"
-    },
-    {
-        "color": "#ffaa00",
-        "preview": "https://brandon-choi.sfo3.digitaloceanspaces.com/portfolio/seji/SIGN.jpg",
-        "videoPreview": "https://brandon-choi.sfo3.digitaloceanspaces.com/portfolio/seji/Seji-Preview-1.m4v",
-        "enabled": "false",
-        "title": "coming",
-        "role": "soon",
-        "desc": "Here are some miscellaneous goodies I made in highschool.",
-        "year": "2018"
+        "link": "https://www.nomina.brandon-choi.info/",
+        "productDetails": [
+            {
+                "projectType": "Concept Demonstration",
+                "role": "Fullstack + Design",
+                "team": [
+                    "solo"
+                ]
+            },
+            {
+                "motivation": [
+                    "To research and study modern ui/ux techniques.",
+                    "Learn scroll interactions involving parallax and animations"
+                ],
+                "challenges": [
+                    "Using Locomotive-Scroll with GSAP",
+                    ""
+                ],
+                "conceptsExplored": [
+                    "Dynamic and fluid scroll animations/ interactions",
+                    "Creating a seamless experience"
+                ]
+            },
+            {
+                "technologies": [
+                    "handlebars",
+                    "sass",
+                    "animejs",
+                    "locomotivescroll",
+                    "rellax",
+                    "glidejs",
+                    "express",
+                    "nodejs"
+                ]
+            }
+        ]
     }
 ]
