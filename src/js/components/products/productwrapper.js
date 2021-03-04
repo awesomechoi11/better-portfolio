@@ -1,13 +1,15 @@
+import { AnimatePresence, motion } from 'framer-motion'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import PerfectScrollbar from 'react-perfect-scrollbar'
+
+import InfBanner from './infbanner'
 import { PreviewHeader } from '../previewcard/previewcard'
 import { products } from '../../../config'
 import '../../../sass/product.scss'
 import { exitPreview, fromPreviewToProduct } from '../../animVariants'
 import { openProduct_atom, scrollEnabled_atom, selectedPreview_atom } from '../../utils/Atom'
-import { AnimatePresence, motion } from 'framer-motion'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
-import 'react-perfect-scrollbar/dist/css/styles.css';
-import PerfectScrollbar from 'react-perfect-scrollbar'
 
 const closeSvg = (
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" >
@@ -64,7 +66,7 @@ function Product(props) {
     return (
         <div className='product-showcase'>
             {data.productDetails && <ProductDetails data={data.productDetails} />}
-
+            {data.initialSketch && <InitialSketch data={data.initialSketch} />}
 
         </div>
     )
@@ -73,7 +75,6 @@ function Product(props) {
 function ProductDetails(props) {
 
     function Title({ value, className }) {
-        console.log(value)
         return (
             <div className={'title ' + className}>
                 {value}
@@ -113,10 +114,32 @@ function ProductDetails(props) {
 
 }
 
-function InitialSketch(props) {
-    return (
-        <div>
+function InitialSketch({ data }) {
 
+    function ImageItem({ url }) {
+        return (
+            <div className='img-item'>
+                <img src={url} />
+            </div>
+        )
+    }
+
+    return (
+        <div className='sketch-wrapper'>
+
+            <div className='banner-wrapper'>
+                <InfBanner text='INITIAL SKETCH *' />
+            </div>
+            <div className='gallery'>
+                {data.images.map((col, index) => (
+                    <div key={'col-' + index} className={'col-' + index}>
+                        {col.map(img => (
+                            <ImageItem url={img} />
+                        ))}
+                    </div>
+                ))}
+
+            </div>
         </div>
     )
 }

@@ -1,0 +1,16 @@
+.infinite-banner {
+    position: absolute;
+    display: flex;
+    flex-wrap: nowrap;
+    transform-origin: top left;
+    align-items: center;
+    .banner-text {
+        flex-shrink: 0;
+    }
+}
+
+.pog {
+    left: 0;
+    top: 0;
+    background: red;
+}

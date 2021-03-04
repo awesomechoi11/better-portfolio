@@ -39,3 +39,8 @@ export const scrollEnabled_atom = atom({
     key: 'scrollEnabled',
     default: true
 })
+
+export const screenSize_atom = atom({
+    key: 'screenSize',
+    default: 0
+})

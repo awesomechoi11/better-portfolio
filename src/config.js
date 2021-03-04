@@ -42,7 +42,10 @@ export const products = [
         "initialSketch": {
             color: 'red',
             background: 'pink',
-            images: []
+            images: [
+                ["https://brandon-choi.sfo3.cdn.digitaloceanspaces.com/portfolio/seji/initialSketch/col1.jpg", "https://brandon-choi.sfo3.cdn.digitaloceanspaces.com/portfolio/seji/initialSketch/col12.jpg"],
+                ["https://brandon-choi.sfo3.cdn.digitaloceanspaces.com/portfolio/seji/initialSketch/col21.jpg", "https://brandon-choi.sfo3.cdn.digitaloceanspaces.com/portfolio/seji/initialSketch/col22.jpg"]
+            ]
         }
     },
     {

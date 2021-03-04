@@ -24,8 +24,8 @@
 }
 
 .product-showcase {
-    padding: 0 calcvw(160);
-
+    padding: 0 calcvw(160) calcvw(160);
+    overflow: hidden;
     .product-details {
         display: flex;
         justify-content: space-between;
@@ -52,6 +52,39 @@
             border-radius: 10px;
             font-size: calcvw(14);
             background: $darkblue;
+        }
+    }
+
+    .banner-wrapper {
+        width: calcvw(200);
+        transform: rotate(10deg) translateX(-200px);
+        user-select: none;
+        height: calcvw(300);
+        .infinite-banner {
+            background: #e85786;
+            height: calcvw(160);
+            transform: rotate(10deg);
+        }
+        .banner-text {
+            color: $ruby;
+            font-size: calcvw(64);
+            font-weight: bold;
+        }
+    }
+    .gallery {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        z-index: 1;
+        > * {
+            width: 48%;
+            flex-shrink: 0;
+        }
+        .img-item {
+            margin-bottom: calcvw(25);
+            img {
+                width: 100%;
+            }
         }
     }
 }

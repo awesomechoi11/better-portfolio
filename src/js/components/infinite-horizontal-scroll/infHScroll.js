@@ -78,11 +78,6 @@ export default function InfHScroll(props) {
 
 
     useEffect(() => {
-        window.addEventListener('resize', e => {
-            //need to throttle
-            // need to change currx and destx. scaling to new size
-        })
-
         //run update once/ recursively runs forever
         console.log('start animation updates')
         requestAnimationFrame(update)
