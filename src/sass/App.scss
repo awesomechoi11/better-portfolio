@@ -1,12 +1,18 @@
 @font-face {
-  font-family: "Lato";
-  src: local(Lato), url("../assets/Lato/Lato-Regular.ttf") format("truetype"),
-    url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+  font-family: "Lato normal";
+  src: local("Lato normal"), local("Lato-normal"), url("../assets/Lato/Lato-Regular.ttf") format("truetype"),
+    url("https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap");
   font-weight: normal;
 }
 @font-face {
-  font-family: "Lato";
-  src: local(Lato Black), local(Lato-Black), url("../assets/Lato/Lato-Black.ttf") format("truetype"),
+  font-family: "Lato lighter";
+  src: local("Lato lighter"), local("Lato-lighter"), url("../assets/Lato/Lato-Light.ttf") format("truetype"),
+    url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
+  font-weight: lighter;
+}
+@font-face {
+  font-family: "Lato bolder";
+  src: local("Lato bolder"), local("Lato-bolder"), url("../assets/Lato/Lato-Black.ttf") format("truetype"),
     url("https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap");
   font-weight: bolder;
 }
@@ -30,4 +36,8 @@ body,
   font-family: lato;
   background: $offblack;
   color: $offwhite;
+}
+
+.title {
+  font-weight: bolder;
 }

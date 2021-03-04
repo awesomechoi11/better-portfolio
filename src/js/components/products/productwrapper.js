@@ -1,5 +1,5 @@
 import { PreviewHeader } from '../previewcard/previewcard'
-import products from '../../../config.json'
+import { products } from '../../../config'
 import '../../../sass/product.scss'
 import { exitPreview, fromPreviewToProduct } from '../../animVariants'
 import { openProduct_atom, scrollEnabled_atom, selectedPreview_atom } from '../../utils/Atom'
@@ -32,7 +32,8 @@ export default function ProductWrapper() {
         <AnimatePresence>
             {openProduct.isOpen && (
                 <motion.div
-                    initial={false}
+                    key='product-wrapper'
+                    initial='initial'
                     animate='animate'
                     exit='exit'
                     variants={exitPreview}
@@ -48,7 +49,7 @@ export default function ProductWrapper() {
                         <div className='content'>
                             <PreviewHeader {...data} video={true} />
                         </div>
-                        <Product />
+                        <Product data={data} />
                     </PerfectScrollbar>
                 </motion.div>
             )}
@@ -58,25 +59,63 @@ export default function ProductWrapper() {
 }
 
 
-function Product() {
+function Product(props) {
+    const data = props.data
     return (
         <div className='product-showcase'>
-            <div className='product-details'>
-                <div className='col-1'>
-                    col1
-                </div>
-                <div className='col-2'>
-                    col1
-                </div>
-                <div className='col-3'>
-                    col1
-                </div>
+            {data.productDetails && <ProductDetails data={data.productDetails} />}
+
+
+        </div>
+    )
+}
+
+function ProductDetails(props) {
+
+    function Title({ value, className }) {
+        console.log(value)
+        return (
+            <div className={'title ' + className}>
+                {value}
             </div>
-            hello <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />s
-            hello <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />s
-            hello <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />s
-            hello <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />s
-            hello <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />s
+        )
+    }
+    function ListItem({ value, className }) {
+        return (
+            <div className={'list-item ' + className}>
+                {value}
+            </div>
+        )
+    }
+
+    return (
+        <div className='product-details'>
+            {props.data.map((column, index) => (
+                <div key={'col-' + index} className={'col-' + index}>
+                    {column.map((row, index) => (
+                        <div key={'row-' + index} className={'row ' + (row[0] === 'Technologies' ? ' tech' : '')}>
+                            <Title value={row[0]}
+                                className={row[0] === 'Technologies' ? ' tech' : ''}
+                            />
+                            <div className={'items-wrapper ' + (row[0] === 'Technologies' ? ' tech' : '')}>
+                                {row[1].map(item => (
+                                    <ListItem value={item}
+                                        className={row[0] === 'Technologies' ? ' tech' : ''}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            ))}
+        </div>
+    )
+
+}
+
+function InitialSketch(props) {
+    return (
+        <div>
 
         </div>
     )

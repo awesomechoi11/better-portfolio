@@ -4,7 +4,7 @@ import { gotoIndex_atom, isVisible_atom, openProduct_atom, scrollEnabled_atom, s
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { motion, AnimateSharedLayout, useAnimation } from "framer-motion"
 
-import products from "../../../config.json";
+import { products } from "../../../config";
 import { fromPreviewToProduct } from "../../animVariants";
 import { useState } from "react";
 
@@ -54,7 +54,9 @@ function PreviewCard({ width, index, color }) {
         controls.start("animate")
             .then((value) => {
                 setOpenProduct({ isOpen: true, index: index })
-                controls.set("initial")
+                setTimeout(() => {
+                    controls.set("initial")
+                }, 400);
             })
     }
 

@@ -29,5 +29,29 @@
     .product-details {
         display: flex;
         justify-content: space-between;
+        .title {
+            font-size: calcvw(28);
+            padding: 20px 0;
+        }
+        .list-item {
+            font-size: calcvw(14);
+            margin: 7px 0;
+        }
+    }
+    .col-2 {
+        width: 40%;
+        flex-shrink: 0;
+    }
+    .items-wrapper.tech {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+
+        > * {
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: calcvw(14);
+            background: $darkblue;
+        }
     }
 }
